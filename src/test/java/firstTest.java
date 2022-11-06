@@ -25,6 +25,7 @@ public class firstTest {
 
         driver.manage().window().maximize();
 
+        
         driver.get("https://www.youtube.com/playlist?list=PLxKLMN7WdG5AtunfydnC6JjVRg6ZHuv5O");
 
         List<WebElement> listSong = driver.findElements(By.xpath("//a[@class='yt-simple-endpoint style-scope ytd-playlist-video-renderer']"));
