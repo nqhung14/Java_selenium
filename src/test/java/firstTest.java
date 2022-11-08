@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 import java.util.List;
 
 public class firstTest {
@@ -12,22 +11,18 @@ public class firstTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-        initDriver();
+        DriverUtils.initChromeDriver(driver);
         getLinkOfVideo(1);
         convertToMp3_2(getLinkOfVideo(1));
 
     }
-//    public static WebDriver chromeDriver (){
-//        WebDriverManager.chromedriver().setup();
-//        WebDriver driver = new ChromeDriver();
-//        return driver;
-//    }
-    public static void initDriver (){
+
+    public static void initDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
-    public static String getLinkOfVideo (Integer indexSong){
+    public static String getLinkOfVideo(Integer indexSong) {
 
         driver.manage().window().maximize();
         driver.get("https://www.youtube.com/playlist?list=PLxKLMN7WdG5AtunfydnC6JjVRg6ZHuv5O");
@@ -36,25 +31,25 @@ public class firstTest {
         return listSong.get(indexSong).getAttribute("href");
     }
 
-    public static void convertToMp3 (String linkOfSong, WebDriver driver) throws InterruptedException {
+    public static void convertToMp3(String linkOfSong, WebDriver driver) throws InterruptedException {
 
-       driver.manage().window().maximize();
-       driver.get("https://yt2mp3.info/?l=en");
-       driver.findElement(By.xpath("//input[@id='input']")).sendKeys(linkOfSong);
-       driver.findElement(By.xpath("//button[@id='submit']")).click();
+        driver.manage().window().maximize();
+        driver.get("https://yt2mp3.info/?l=en");
+        driver.findElement(By.xpath("//input[@id='input']")).sendKeys(linkOfSong);
+        driver.findElement(By.xpath("//button[@id='submit']")).click();
 
-       Thread.sleep(3000);
-       String buttonDownloadMp3 = "//a[@onclick='downloaddata('320')']";
-       String buttonPlayMp3 = "//tr//td//a[@onclick='playmp3()']";
+        Thread.sleep(3000);
+        String buttonDownloadMp3 = "//a[@onclick='downloaddata('320')']";
+        String buttonPlayMp3 = "//tr//td//a[@onclick='playmp3()']";
 //       driver.findElement(By.xpath(buttonDownloadMp3)).click();
 //       driver.findElement(By.xpath(buttonPlayMp3)).click();
 
     }
 
-    public static void convertToMp3_2 (String linkOfSong) throws InterruptedException {
+    public static void convertToMp3_2(String linkOfSong) throws InterruptedException {
 
         driver.manage().window().maximize();
-            driver.get("https://yt2mp3.info/?l=en");
+        driver.get("https://yt2mp3.info/?l=en");
         driver.findElement(By.xpath("//input[@id='input']")).sendKeys(linkOfSong);
         driver.findElement(By.xpath("//button[@id='submit']")).click();
 
@@ -63,12 +58,12 @@ public class firstTest {
         String buttonDownloadMp3 = "//a[@onclick='downloaddata('320')']";
 
 //        String buttonPlayMp3 = "//tr//td//a[@onclick='playmp3()']";
-       driver.findElement(By.xpath(buttonDownloadMp3)).click();
-
+        driver.findElement(By.xpath(buttonDownloadMp3)).click();
 
 
     }
-    public static void closeDriver (WebDriver driver){
+
+    public static void closeDriver(WebDriver driver) {
         driver.close();
     }
 }
