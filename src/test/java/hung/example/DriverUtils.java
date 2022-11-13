@@ -51,7 +51,6 @@ public class DriverUtils {
         driver.findElement(By.xpath(webElement)).sendKeys(TEXT);
     }
 
-
     //todo: write method to getText
 
 }
