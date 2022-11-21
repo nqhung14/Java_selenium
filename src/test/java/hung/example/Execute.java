@@ -21,6 +21,5 @@ public class Execute {
         DriverUtils.inputText(POM.inputLinkConvert, linkDownload);
         DriverUtils.clickON(POM.submitButton);
         DriverUtils.clickON(POM.buttonDownloadMp3);
-
     }
 }
