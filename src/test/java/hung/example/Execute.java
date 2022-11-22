@@ -12,7 +12,7 @@ public class Execute {
 //    public static WebDriver driver;
     public static void main(String[] args) {
 
-        DriverUtils.initDriver(DriverUtils.driver);
+        DriverUtils.initDriver();
         DriverUtils.navigateToULR(DATA.youtubeURL);
 
         String linkDownload = DriverUtils.getLinkOfVideo(1);
