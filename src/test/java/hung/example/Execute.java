@@ -21,15 +21,14 @@ import static hung.example.DriverUtils.getText;
  */
 public class Execute {
     //Todo: call method from DriverUtils to getLink you tube and convertMp3
-//    public static WebDriver driver;
+    @Test
     public static void main(String[] args) {
-
-        WebDriver webDriver;
 
         DriverUtils.initDriver();
         DriverUtils.navigateToULR(DATA.youtubeURL);
 
         String linkDownload = DriverUtils.getLinkOfVideo(1);
+
         String nameOfSong = DriverUtils.getTextByElement(youtubePage.listOfPlaylist, 1);
 
         DriverUtils.navigateToURLWithNewTab(DATA.convertMp3);
@@ -37,20 +36,14 @@ public class Execute {
         DriverUtils.inputText(yt2mp3Page.inputLinkToConvert, linkDownload);
 
         DriverUtils.clickON(yt2mp3Page.convertButton);
-
         //Wait until Download button display
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(yt2mp3Page.downloadFile)));
         //Assert name of song between youtube page and download youtube page
         String textOfSongFromDownloadPage = getText(yt2mp3Page.NameOfSong);
-//        String getTextOfSongFromDownloadPage = DriverUtils.getTextByAttribute(yt2mp3Page.NameOfSong, "label");
         Assert.assertEquals(nameOfSong, textOfSongFromDownloadPage);
-        //click on download button
+        //Download mp3 file
         DriverUtils.clickON((yt2mp3Page.downloadFile));
-
-
-//        driver.close();
-
+        driver.close();
     }
-
 }
