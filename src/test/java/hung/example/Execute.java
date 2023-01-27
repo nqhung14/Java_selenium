@@ -28,16 +28,19 @@ public class Execute {
         DriverUtils.initDriver();
         DriverUtils.navigateToULR(DATA.youtubeURL);
 
+        //count video on youtube list
         int countSong = DriverUtils.lenghtOfListVideo();
 
         ArrayList<String> linkOfVideo = new ArrayList<>();
         ArrayList<String> nameOfSong = new ArrayList<>();
 
+        //add link of song to ArrayList
         for (int x = 0; x < countSong; x++){
             linkOfVideo.add(DriverUtils.getLinkOfVideo(x));
             nameOfSong.add(DriverUtils.getNameOfSong(youtubePage.listOfPlaylist, x));
         }
 
+        //Convert to mp3 and download
         for (int y=0; y < countSong; y++){
             DriverUtils.navigateToURLWithNewTab(DATA.convertMp3);
             DriverUtils.inputText(yt2mp3Page.inputLinkToConvert, linkOfVideo.get(y));
