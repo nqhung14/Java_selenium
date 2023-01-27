@@ -33,17 +33,25 @@ public class DriverUtils {
         return listSong.get(indexSong).getAttribute("href");
     }
 
+    //Get size of list video
+    public static Integer lenghtOfListVideo(){
+        return driver.findElements(By.xpath(youtubePage.listOfPlaylist)).size();
+    }
 
     //todo: write method to clickOn webElement
     public static void clickON(String webElement) {
         driver.findElement(By.xpath(webElement)).click();
     }
 
-    public static String getTextByElement(String webElement, int indexElement) {
+    public static String getNameOfSong(String webElement, int indexElement) {
         List<WebElement> getTextByElement = driver.findElements(By.xpath(webElement));
         return getTextByElement.get(indexElement).getText();
     }
 
+//    public static String getNameOfSong(int indexElement){
+//        List<WebElement> getTextByElement = driver.findElements(By.xpath(youtubePage.listOfPlaylist));
+//        return getTextByElement.get(indexElement).getText();
+//    }
 
     //todo: navigate link with new tab open
     public static void navigateToURLWithNewTab(String URL) {

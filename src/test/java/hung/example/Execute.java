@@ -9,6 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,23 +28,30 @@ public class Execute {
         DriverUtils.initDriver();
         DriverUtils.navigateToULR(DATA.youtubeURL);
 
-        String linkDownload = DriverUtils.getLinkOfVideo(1);
+        int countSong = DriverUtils.lenghtOfListVideo();
 
-        String nameOfSong = DriverUtils.getTextByElement(youtubePage.listOfPlaylist, 1);
+        ArrayList<String> linkOfVideo = new ArrayList<>();
+        ArrayList<String> nameOfSong = new ArrayList<>();
 
-        DriverUtils.navigateToURLWithNewTab(DATA.convertMp3);
+        for (int x = 0; x < countSong; x++){
+            linkOfVideo.add(DriverUtils.getLinkOfVideo(x));
+            nameOfSong.add(DriverUtils.getNameOfSong(youtubePage.listOfPlaylist, x));
+        }
 
-        DriverUtils.inputText(yt2mp3Page.inputLinkToConvert, linkDownload);
-
-        DriverUtils.clickON(yt2mp3Page.convertButton);
-        //Wait until Download button display
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(yt2mp3Page.downloadFile)));
-        //Assert name of song between youtube page and download youtube page
-        String textOfSongFromDownloadPage = getText(yt2mp3Page.NameOfSong);
-        Assert.assertEquals(nameOfSong, textOfSongFromDownloadPage);
-        //Download mp3 file
-        DriverUtils.clickON((yt2mp3Page.downloadFile));
+        for (int y=0; y < countSong; y++){
+            DriverUtils.navigateToURLWithNewTab(DATA.convertMp3);
+            DriverUtils.inputText(yt2mp3Page.inputLinkToConvert, linkOfVideo.get(y));
+            DriverUtils.clickON(yt2mp3Page.convertButton);
+            //Wait until Download button display
+            WebDriverWait wait = new WebDriverWait(driver, 20);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(yt2mp3Page.downloadFile)));
+            String textOfSongFromDownloadPage = getText(yt2mp3Page.NameOfSong);
+            //Assert name of song between youtube page and download youtube page
+            Assert.assertEquals(nameOfSong.get(y), textOfSongFromDownloadPage);
+            //Download mp3 file
+            DriverUtils.clickON((yt2mp3Page.downloadFile));
+        }
         driver.close();
-    }
-}
+            }
+        }
+
